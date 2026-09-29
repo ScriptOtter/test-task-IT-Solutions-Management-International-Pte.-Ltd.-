@@ -19,12 +19,19 @@ export class PrismaService
 
   public constructor(private readonly configService: ConfigService) {
     const pool = new Pool({
+      //user:configService.getOrThrow<string>('POSTGRES_USER'), 
+      //password:configService.getOrThrow<string>('POSTGRES_PASSWORD'), 
+      //database:configService.getOrThrow<string>('POSTGRES_DB'),
+      //host: configService.getOrThrow<string>('POSTGRES_HOST'),
+      //port: Number(configService.getOrThrow<string>('POSTGRES_PORT')),
+
       connectionString: configService.getOrThrow<string>('DATABASE_URL'),
       connectionTimeoutMillis: 5000,
       idleTimeoutMillis: 30000,
       max: 10,
     });
     const adapter = new PrismaPg(pool);
+    
     super({ adapter });
   }
 
@@ -36,6 +43,7 @@ export class PrismaService
       this.logger.log(
         `Database initialized (${new Date().getMilliseconds() - time}ms)`,
       );
+      
       await this.seeding();
     } catch (error) {
       this.logger.error(error);

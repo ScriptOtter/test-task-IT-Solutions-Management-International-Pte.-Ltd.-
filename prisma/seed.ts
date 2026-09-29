@@ -38,7 +38,7 @@ export async function PrismaSeeder(prisma: PrismaService) {
     });
     console.log('Links created');
 
-    console.log('🌱 Creating skills...');
+    console.log('Creating skills...');
     const skills: { name: string; level: string }[] = [
       { name: 'React', level: 'Expert' },
       { name: 'TypeScript', level: 'Expert' },

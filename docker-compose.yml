@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: test-app
+    restart: always
+    environment:
+      PORT: ${PORT}
+      DATABASE_URL: ${DATABASE_URL}
+    ports:
+      - '4200:${PORT}'
+    networks:
+      - test-app
+
+volumes:
+  postgres_data:
+
+networks:
+  test-app:
